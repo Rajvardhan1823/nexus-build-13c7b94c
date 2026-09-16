@@ -78,5 +78,6 @@ export const getActiveResume = createServerFn({ method: "GET" })
       .limit(1)
       .maybeSingle();
     if (!data) return null;
-    return { ...data, preview: data.raw_text.slice(0, 600) , raw_text: undefined };
+    const { raw_text, ...rest } = data;
+    return { ...rest, preview: raw_text.slice(0, 600) };
   });
